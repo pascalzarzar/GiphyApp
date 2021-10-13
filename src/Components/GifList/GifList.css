@@ -1,7 +1,13 @@
-.darkMode {
-    background-color: #373737;
+.GifList {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center
 }
 
-.lightMode {
-    background-color: white;
+.GifList-gif {
+    width: 100%;
+    max-width: 400px;
 }

@@ -1,25 +1,18 @@
-import { useState } from "react";
-import Header from '../Header/Header.js'
-import './GifList.css'
+import './GifList.css';
 
-const GifList = () => {
+const GifList = (props) => {
 
-    //setting state to manage changes between light and dark state.
-    const [isDark, setIsDark] = useState(false);
-
-    //function to handle light and dark state when clicking the button
-    const lightChange = () => {
-        setIsDark(!isDark);
-    }
+    const gifs = props.gifs;
 
     return(
-        <main className={isDark ? 'darkMode' : 'lightMode'}>
-            <Header 
-            handleLightChange={lightChange}
-            darkState={isDark}
-            />
-        </main>
-    );
+        <div className='GifList'>
+            {gifs.map((gif) => {
+                return (
+                    <img className='GifList-gif' src={gif.images.downsized.url} alt="gif" key={gif.id}/>
+                )
+            })}
+        </div>
+    )
 }
 
 export default GifList;
