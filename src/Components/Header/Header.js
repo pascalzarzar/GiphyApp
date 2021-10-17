@@ -10,7 +10,7 @@ const Header = (props) => {
             <div className='Header-container'>
                 <img className='Header-logo' src={props.darkState ? darkLogo : logo } alt="Gifos logo" />
                 <button className={props.darkState ? 'btn dark' : 'btn light'} onClick={ props.handleLightChange }>
-                    {props.darkState ? 'Modo Dark' : 'Modo Light'}
+                    {props.darkState ? 'Modo Light' : 'Modo Dark'}
                 </button>
             </div>
         </header>

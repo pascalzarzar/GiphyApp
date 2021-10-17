@@ -6,35 +6,53 @@ import './GifApp.css'
 
 const GifApp = () => {
 
+    //parameters to use the giphy API.
+    const apiKey = 'cFuWCp1hYO4aZJ75qSSAmDYgUP9ePl7q';
+    const limit = 15;
+
     //setting state to manage changes between light and dark state.
     const [isDark, setIsDark] = useState(false);
     
-    //setting state to manage input changes.
+    //setting state to manage input changes and gif search item.
     const [inputValue, setInputValue] = useState('')
+    const [searchValue, setSearchValue] = useState('');
 
     //function to handle light and dark state when clicking the button
     const lightChange = () => {
         setIsDark(!isDark);
     }
 
-    //function to handle input changes.
-    const inputChange = (evt) => {
-        setInputValue(evt.target.value);
+    //function to handle search form submit.
+    const searchSubmit = (evt) => {
+        evt.preventDefault();
+        setSearchValue(inputValue);
+        setInputValue('');
     }
-
-    const [gifs, setGifs] = useState([]);
+    
+    //setting states for trending and search gifs
+    const [trendingGifs, setTrendingGifs] = useState([]);
+    const [searchGifs, setSearchGifs] = useState([]);
 
     //useEffect hook to fetch the initial trending gifs
     useEffect(() => {
-        const fetchGifs = () => { 
-            const apiKey = 'cFuWCp1hYO4aZJ75qSSAmDYgUP9ePl7q'
-            const limit = 10
+        const fetchTrendingGifs = () => { 
             fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=${limit}`)
             .then(response => response.json())
-            .then(data => setGifs(data.data))
+            .then(data => setTrendingGifs(data.data))
         }
-        fetchGifs();
+        fetchTrendingGifs();
+        console.log('trending fetching')
     }, []);
+
+    useEffect(() => {
+        const fetchSearchGifs = () => {
+            fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchValue}&limit=${limit}&offset=0&rating=g&lang=es`)
+            .then(response => response.json())
+            .then(data => setSearchGifs(data.data));
+        }
+        fetchSearchGifs();
+        console.log('working');
+    }, [searchValue]);
 
     return(
         <main className={isDark ? 'darkMode' : 'lightMode'}>
@@ -43,11 +61,13 @@ const GifApp = () => {
             darkState={isDark}
             />
             <SearchInput
-            changeHandler={inputChange}
+            setInputValue={setInputValue}
+            handleSubmit={searchSubmit}
             value={inputValue}
             />
             <GifList
-            gifs={gifs}
+            trendingGifs={trendingGifs}
+            searchGifs={searchGifs}
             />
         </main>
     );
