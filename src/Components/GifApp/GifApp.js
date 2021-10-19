@@ -17,6 +17,9 @@ const GifApp = () => {
     const [inputValue, setInputValue] = useState('')
     const [searchValue, setSearchValue] = useState('');
 
+    //setting state to identify when is not showing trending gif's
+    const [isTrending, setIsTrending] = useState(true);
+
     //function to handle light and dark state when clicking the button
     const lightChange = () => {
         setIsDark(!isDark);
@@ -59,6 +62,7 @@ const GifApp = () => {
                 fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchValue}&limit=${limit}&offset=0&rating=g&lang=es`)
                 .then(response => response.json())
                 .then(data => setGifs(data.data));
+                setIsTrending(false);
             } else {
                 notInitialRender.current = true;
             }
@@ -67,7 +71,7 @@ const GifApp = () => {
     }, [searchValue]);
 
     return(
-        <main className={isDark ? 'darkMode' : 'lightMode'}>
+        <div className={isDark ? 'GifApp darkMode' : 'GifApp lightMode'}>
             <Header 
             handleLightChange={lightChange}
             darkState={isDark}
@@ -83,8 +87,9 @@ const GifApp = () => {
             gifs={gifs}
             searchValue={searchValue}
             darkState={isDark}
+            isTrending={isTrending}
             />
-        </main>
+        </div>
     );
 }
 

@@ -4,7 +4,7 @@ const GifList = (props) => {
 
     return(
         <div>
-            {props.searchValue.length !== 0 ?
+            { !props.isTrending ?
                 <h3 className={props.darkState ? 'gifList-heading gifList-dark' : 'gifList-heading gifList-light'}>
                     Resultados al buscar gifs por: <span>{props.searchValue}</span>
                 </h3>

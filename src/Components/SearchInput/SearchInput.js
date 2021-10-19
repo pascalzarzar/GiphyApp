@@ -31,7 +31,7 @@ const SearchInput = (props) => {
             <h1 className={props.darkState ? 'SearchInput-heading-dark' : 'SearchInput-heading' }>¡Inspírate y busca los mejores <span>GIFS</span>!</h1>
             <img className='SearchInput-illustration' src={illustration} alt="Search Illustration"/>
             <form className='SearchInput-container'>
-                <input type="text" placeholder='Busca Gifs' value={props.value} onChange={inputChange}/>
+                <input type="text" placeholder='Busca Gifs' value={props.value} onChange={inputChange} onSubmit={props.handleSubmit}/>
                 <submit onClick={props.handleSubmit} className='SearchInput-submit'>
                     <img src={darkSearchIcon} alt='Search Icon' />
                 </submit>
