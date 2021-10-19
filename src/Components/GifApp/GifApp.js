@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from '../Header/Header.js'
 import SearchInput from '../SearchInput/SearchInput.js'
 import GifList from "../GifList/GifList.js";
@@ -28,30 +28,42 @@ const GifApp = () => {
         setSearchValue(inputValue);
         setInputValue('');
     }
+
+    //function to handle search from autocomplete tags
+    const tagSubmit = (evt) => {
+        evt.preventDefault();
+        setSearchValue(evt.target.innerText);
+        setInputValue('');
+    }
     
     //setting states for trending and search gifs
-    const [trendingGifs, setTrendingGifs] = useState([]);
-    const [searchGifs, setSearchGifs] = useState([]);
+    const [gifs, setGifs] = useState([]);
 
     //useEffect hook to fetch the initial trending gifs
     useEffect(() => {
         const fetchTrendingGifs = () => { 
             fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=${limit}`)
             .then(response => response.json())
-            .then(data => setTrendingGifs(data.data))
+            .then(data => setGifs(data.data))
         }
         fetchTrendingGifs();
-        console.log('trending fetching')
     }, []);
 
+    //useRef hook to avoid triggering gif search fetch on first rendering
+    const notInitialRender = useRef(false);
+
+    //useEffect to fetch gifs according a category search
     useEffect(() => {
         const fetchSearchGifs = () => {
-            fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchValue}&limit=${limit}&offset=0&rating=g&lang=es`)
-            .then(response => response.json())
-            .then(data => setSearchGifs(data.data));
+            if(notInitialRender.current){
+                fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchValue}&limit=${limit}&offset=0&rating=g&lang=es`)
+                .then(response => response.json())
+                .then(data => setGifs(data.data));
+            } else {
+                notInitialRender.current = true;
+            }
         }
         fetchSearchGifs();
-        console.log('working');
     }, [searchValue]);
 
     return(
@@ -63,11 +75,14 @@ const GifApp = () => {
             <SearchInput
             setInputValue={setInputValue}
             handleSubmit={searchSubmit}
+            handleTagSubmit={tagSubmit}
             value={inputValue}
+            darkState={isDark}
             />
             <GifList
-            trendingGifs={trendingGifs}
-            searchGifs={searchGifs}
+            gifs={gifs}
+            searchValue={searchValue}
+            darkState={isDark}
             />
         </main>
     );

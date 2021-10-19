@@ -1,3 +1,20 @@
+
+.gifList-heading {
+    font-weight: 500;
+}
+
+.gifList-heading span {
+    font-weight: 700;
+}
+
+.gifList-dark {
+    color:white;
+}
+
+.gifList-light {
+    color:#6809E1;
+}
+
 .GifList-container {
     width: 80%;
     max-width: 900px;
@@ -12,8 +29,9 @@
     margin-top: 2em;
 }
 
-.GifList-gif {
-    width: 100%;
-    max-width: 250px;
-    margin-bottom: 3em;
+.GifList-gif img {
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    margin: 1.5em 0;
 }

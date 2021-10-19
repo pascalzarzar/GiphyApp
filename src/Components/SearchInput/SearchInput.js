@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import darkSearchIcon from './Assets/icon-search-mod-noc.svg'
+import searchIcon from './Assets/icon-search.svg'
 import illustration from './Assets/ilustra_header.svg'
 import './SearchInput.css'
 
@@ -23,20 +24,32 @@ const SearchInput = (props) => {
             .then(data => setTags(data.data));
         }
         fetchAutocomplete();
-    },[props.value])
+    },[props.value]);
 
     return(
         <div className='SearchInput'>
-            <h1>Inspirate y busca los mejores <span>GIFS</span></h1>
+            <h1 className={props.darkState ? 'SearchInput-heading-dark' : 'SearchInput-heading' }>¡Inspírate y busca los mejores <span>GIFS</span>!</h1>
             <img className='SearchInput-illustration' src={illustration} alt="Search Illustration"/>
-            <form className='SearchInput-container' onSubmit={props.handleSubmit}>
-                <input type="text" value={props.value} onChange={inputChange}/>
-                <button className='SearchInput-submit'>
+            <form className='SearchInput-container'>
+                <input type="text" placeholder='Busca Gifs' value={props.value} onChange={inputChange}/>
+                <submit onClick={props.handleSubmit} className='SearchInput-submit'>
                     <img src={darkSearchIcon} alt='Search Icon' />
-                </button>
+                </submit>
             </form>
+            {tags.length !== 0 &&
+                <ul className='SearchInput-dropdown'>
+                    {tags.map((tag) => {
+                        return(
+                            <li className='SearchInput-option' onClick={props.handleTagSubmit}>
+                                <img src={searchIcon} alt='searchIcon' className='SearchInput-tagIcon'/>
+                                {tag.name}
+                            </li>
+                        );
+                    })}
+                </ul>
+            }
         </div>
-    )
+    );
 }
 
 export default SearchInput;
