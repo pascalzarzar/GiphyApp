@@ -40,7 +40,7 @@ const SearchInput = (props) => {
                 <ul className='SearchInput-dropdown'>
                     {tags.map((tag) => {
                         return(
-                            <li className='SearchInput-option' onClick={props.handleTagSubmit}>
+                            <li className='SearchInput-option' onClick={props.handleTagSubmit} key={tag.name}>
                                 <img src={searchIcon} alt='searchIcon' className='SearchInput-tagIcon'/>
                                 {tag.name}
                             </li>

@@ -17,7 +17,7 @@ const GifList = (props) => {
                 {props.gifs.length !== 0 ?
                     props.gifs.map((gif) => {
                         return (
-                            <a className='GifList-gif' href={gif.bitly_url} target="_blank" rel='noreferrer'>
+                            <a className='GifList-gif' href={gif.bitly_url} target="_blank" rel='noreferrer' key={gif.id}>
                                 <img src={gif.images.downsized.url} alt="gif" key={gif.id}/>
                             </a>
                         )
