@@ -51,12 +51,13 @@ const SearchInput = (props) => {
 					onChange={inputChange}
 					onSubmit={props.handleSubmit}
 				/>
-				<submit
+				<button
 					onClick={props.handleSubmit}
 					className="SearchInput-submit"
+					type="submit"
 				>
 					<img src={darkSearchIcon} alt="Search Icon" />
-				</submit>
+				</button>
 			</form>
 			{tags.length !== 0 && (
 				<ul className="SearchInput-dropdown">

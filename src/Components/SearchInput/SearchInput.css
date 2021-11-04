@@ -32,6 +32,7 @@
 	display: flex;
 	justify-content: center;
 	align-content: center;
+	align-items: center;
 	max-width: 500px;
 }
 
@@ -42,6 +43,7 @@
 	border: 1px solid #6809e1;
 	border-radius: 20px 0px 0px 20px;
 	flex-grow: 3;
+	box-sizing: border-box;
 }
 
 .SearchInput-submit {
