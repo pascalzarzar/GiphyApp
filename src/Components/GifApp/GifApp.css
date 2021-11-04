@@ -1,12 +1,11 @@
 .GifApp {
-    height: 100vh;
+	height: 100vh;
 }
 
 .darkMode {
-    background-color: #373737;
-
+	background-color: #373737;
 }
 
 .lightMode {
-    background-color: white;
+	background-color: white;
 }

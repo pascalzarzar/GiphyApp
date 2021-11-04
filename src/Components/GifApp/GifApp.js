@@ -56,14 +56,11 @@ const GifApp = () => {
 
 	//useEffect hook to fetch the initial trending gifs
 	useEffect(() => {
-		const fetchTrendingGifs = () => {
-			fetch(
-				`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=${limit}`
-			)
-				.then((response) => response.json())
-				.then((data) => setGifs(data.data));
-		};
-		fetchTrendingGifs();
+		fetch(
+			`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=${limit}`
+		)
+			.then((response) => response.json())
+			.then((data) => setGifs(data.data));
 	}, []);
 
 	//useRef hook to avoid triggering gif search fetch on first rendering
@@ -71,22 +68,19 @@ const GifApp = () => {
 
 	//useEffect to fetch gifs according a category search
 	useEffect(() => {
-		const fetchSearchGifs = () => {
-			if (notInitialRender.current) {
-				fetch(
-					`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchValue}&limit=${limit}&offset=0&rating=g&lang=es`
-				)
-					.then((response) => response.json())
-					.then((data) => {
-						setGifs(data.data);
-						delay();
-					});
-			} else {
-				notInitialRender.current = true;
-			}
-		};
-		fetchSearchGifs();
-		setIsTrending(false);
+		if (notInitialRender.current) {
+			fetch(
+				`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchValue}&limit=${limit}&offset=0&rating=g&lang=es`
+			)
+				.then((response) => response.json())
+				.then((data) => {
+					setGifs(data.data);
+					delay();
+					setIsTrending(false);
+				});
+		} else {
+			notInitialRender.current = true;
+		}
 	}, [searchValue]);
 
 	return (

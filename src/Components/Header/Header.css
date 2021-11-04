@@ -1,41 +1,40 @@
 .Header {
-    border-top: 5px solid rgb(85, 0, 255);
+	border-top: 5px solid rgb(85, 0, 255);
 }
 
-.Header-container{
-    max-width: 996px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:auto;
-    padding: 1em;   
+.Header-container {
+	max-width: 996px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: auto;
+	padding: 1em;
 }
 
 img {
-    width: 59px;
+	width: 59px;
 }
 
 .btn {
-    border-radius: 5px;
-    width: 148px;
-    height: 43px;
-    background: none;
-    border-radius: 61px;
-    font-weight: 900;
-    text-transform: uppercase;
+	border-radius: 5px;
+	width: 148px;
+	height: 43px;
+	background: none;
+	border-radius: 61px;
+	font-weight: 900;
+	text-transform: uppercase;
 }
 
 .btn:hover {
-    background-color: rgb(80, 227, 194);
+	background-color: rgb(80, 227, 194);
 }
 
 .Header-light {
-    color: #6809E1;
-    border: 1px solid #6809E1;
+	color: #6809e1;
+	border: 1px solid #6809e1;
 }
 
 .Header-dark {
-    color: white;
-    border: 1px solid white;
+	color: white;
+	border: 1px solid white;
 }
-
