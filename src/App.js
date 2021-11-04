@@ -1,13 +1,12 @@
-import GifApp from './Components/GifApp/GifApp';
-import './App.css';
+import GifApp from "./Components/GifApp/GifApp";
+import "./Styles/App.css";
 
 const App = () => {
-
-  return(
-    <div className='App'>
-      <GifApp/>
-    </div>
-  );
-}
+	return (
+		<div className="App">
+			<GifApp />
+		</div>
+	);
+};
 
 export default App;
