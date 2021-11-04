@@ -40,6 +40,7 @@ const GifList = (props) => {
 									src={gif.images.downsized.url}
 									alt="gif"
 									key={gif.id}
+									loading="lazy"
 								/>
 							</a>
 						);
